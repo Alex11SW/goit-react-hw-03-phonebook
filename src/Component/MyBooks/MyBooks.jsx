@@ -20,6 +20,22 @@ class MyBooks extends Component {
     filter: "",
   };
 
+  componentDidMount() {
+    const books = JSON.parse(localStorage.getItem("my-books"));
+    if (books?.length) {
+      this.setState({
+        books,
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { books } = this.state;
+    if (prevState.books.length !== books.length) {
+      localStorage.setItem("my-books", JSON.stringify(this.state.books));
+    }
+  }
+
   isDublicate({ name, number }) {
     const { books } = this.state;
     const normalizedName = name.toLowerCase();
