@@ -31,8 +31,8 @@ class MyBooks extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { books } = this.state;
-    if (prevState.books.length !== books.length) {
-      localStorage.setItem("my-books", JSON.stringify(this.state.books));
+    if (prevState.books !== books) {
+      localStorage.setItem("my-books", JSON.stringify(books));
     }
   }
 
